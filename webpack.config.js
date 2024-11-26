@@ -2,7 +2,6 @@ import { dirname, resolve } from 'path';
 import autoprefixer from 'autoprefixer';
 import HtmlPlugin from 'html-webpack-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
-import CnameWebpackPlugin from 'cname-webpack-plugin';
 import StylelintPlugin from 'stylelint-webpack-plugin';
 import ESLintWebpackPlugin from 'eslint-webpack-plugin';
 import postcssFlexbugsFixes from 'postcss-flexbugs-fixes';
@@ -26,9 +25,6 @@ const plugins = [
   }),
   new MiniCSSExtractPlugin({
     filename: '[name].css'
-  }),
-  new CnameWebpackPlugin({
-    domain: 'ayan4m1.github.io'
   })
 ];
 
@@ -48,11 +44,15 @@ if (dev) {
 
 export default {
   mode: dev ? 'development' : 'production',
-  devtool: dev ? 'eval-cheap-module-source-map' : 'cheap-module-source-map',
+  devtool: dev ? 'eval-cheap-module-source-map' : false,
   entry: './src/index.js',
   devServer: {
     open: true,
     port: 9000
+  },
+  externals: {
+    react: 'React',
+    'react-dom': 'ReactDOM'
   },
   module: {
     rules: [
@@ -64,7 +64,7 @@ export default {
       {
         test: /\.(sa|sc|c)ss$/,
         use: [
-          dev ? 'style-loader' : MiniCSSExtractPlugin.loader,
+          MiniCSSExtractPlugin.loader,
           'css-loader',
           {
             loader: 'postcss-loader',
@@ -76,7 +76,14 @@ export default {
               }
             }
           },
-          'sass-loader'
+          {
+            loader: 'sass-loader',
+            options: {
+              sassOptions: {
+                quietDeps: true
+              }
+            }
+          }
         ]
       },
       {
@@ -99,8 +106,8 @@ export default {
   },
   output: {
     path: resolve(__dirname, 'dist'),
-    filename: '[name].js',
-    chunkFilename: '[name].js'
+    filename: '[name].[fullhash].js',
+    chunkFilename: '[name].[chunkhash].js'
   },
   plugins,
   resolve: {

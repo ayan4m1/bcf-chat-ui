@@ -1,27 +1,7 @@
 import { createRoot } from 'react-dom/client';
 
 import './index.scss';
-import 'react-chat-elements/dist/main.css';
-
 // eslint-disable-next-line no-unused-vars
-import ChatTrigger from './ChatTrigger.js';
+import App from './App.js';
 
-// import { ChatUx } from '@ayan4m1/chatux';
-
-// const widget = new ChatUx();
-
-// widget.init({
-//   api: {
-//     endpoint: 'http://localhost:9001',
-//     dataType: 'json'
-//   },
-//   window: {
-//     title: 'Ask Bull City',
-//     infoUrl: 'https://bullcityflavors.com'
-//   }
-// });
-// widget.start(true);
-
-const root = createRoot(document.getElementById('chat-widget'));
-
-root.render(<ChatTrigger />);
+createRoot(document.getElementById('chat-widget')).render(<App />);
