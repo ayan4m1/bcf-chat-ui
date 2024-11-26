@@ -2,16 +2,28 @@
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import throttle from 'lodash.throttle';
-import { faMessage } from '@fortawesome/free-solid-svg-icons';
+import {
+  Button,
+  Card,
+  Container,
+  Form,
+  InputGroup,
+  Row,
+  Col,
+  ButtonGroup
+} from 'react-bootstrap';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Button, Card, Form, InputGroup } from 'react-bootstrap';
+import { faMessage, faSpinner } from '@fortawesome/free-solid-svg-icons';
 
 import ChatMessage from 'ChatMessage';
-import { useCallback, useEffect, useRef, useState } from 'react';
 
 export default function ChatWindow({ show }) {
   const inputRef = useRef();
   const [question, setQuestion] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [showButtons, setShowButtons] = useState(false);
+  const [dismissed, setDismissed] = useState(false);
   const [messages, setMessages] = useState([
     {
       sent: true,
@@ -34,12 +46,18 @@ export default function ChatWindow({ show }) {
       setQuestion(inputRef.current.value);
     }
   }, [setQuestion, inputRef]);
+  const handleDismiss = useCallback(() => setDismissed(true), [setDismissed]);
+  const handleRedirect = useCallback(() => {
+    window.location = 'https://www.bullcityflavors.com/contact-us/';
+  }, []);
 
   useEffect(() => {
-    if (!question) {
+    if (!question || !inputRef.current) {
       return;
     }
 
+    inputRef.current.value = '';
+    setLoading(true);
     setMessages((messages) => [
       ...messages,
       {
@@ -55,12 +73,16 @@ export default function ChatWindow({ show }) {
       // const json = await response.json();
 
       // console.dir(json);
-      setMessages((messages) => [
-        ...messages,
-        {
-          message: 'Testing reply from server'
-        }
-      ]);
+      setTimeout(() => {
+        setShowButtons(true);
+        setLoading(false);
+        setMessages((messages) => [
+          ...messages,
+          {
+            message: 'Testing reply from server'
+          }
+        ]);
+      }, 1500);
     };
 
     throttle(fetchData, 3000)();
@@ -70,29 +92,66 @@ export default function ChatWindow({ show }) {
     <div
       className={classNames(
         'chat-window',
-        `chat-window-${show ? 'visible' : 'invisible'}`
+        `chat-window-${show && !dismissed ? 'visible' : 'invisible'}`
       )}
     >
-      <Card>
+      <Card bg="light">
         <Card.Header>Ask Bull City</Card.Header>
         <Card.Body>
-          <Card.Text className="chat-window-messages">
-            {messages.map((message, index) => (
-              <ChatMessage key={index} {...message} />
-            ))}
-          </Card.Text>
-          <InputGroup>
-            <Form.Control
-              ref={inputRef}
-              type="text"
-              name="message"
-              placeholder="Enter your question here"
-              onKeyDown={handleKeyDown}
-            />
-            <Button variant="primary" onClick={handleClick}>
-              <FontAwesomeIcon icon={faMessage} fixedWidth />
-            </Button>
-          </InputGroup>
+          <Container fluid className="g-0">
+            <Row>
+              <Col>
+                <Card.Text className="chat-window-messages">
+                  {messages.map((message, index) => (
+                    <ChatMessage key={index} sent={message.sent}>
+                      {message.message}
+                    </ChatMessage>
+                  ))}
+                  {loading && (
+                    <ChatMessage>
+                      <FontAwesomeIcon
+                        icon={faSpinner}
+                        spin
+                        fixedWidth
+                        size="xl"
+                      />
+                    </ChatMessage>
+                  )}
+                </Card.Text>
+              </Col>
+            </Row>
+            {showButtons && (
+              <Row>
+                <Col>
+                  <p className="my-2">Did this answer your question?</p>
+                  <ButtonGroup className="d-flex">
+                    <Button variant="success" onClick={handleDismiss}>
+                      Yes
+                    </Button>
+                    <Button variant="danger" onClick={handleRedirect}>
+                      No
+                    </Button>
+                  </ButtonGroup>
+                </Col>
+              </Row>
+            )}
+            <Row className="mt-2">
+              <Col>
+                <InputGroup>
+                  <Form.Control
+                    ref={inputRef}
+                    type="text"
+                    name="message"
+                    placeholder="Enter your question here"
+                    onKeyDown={handleKeyDown}
+                  />
+                  <Button variant="primary" onClick={handleClick}>
+                    <FontAwesomeIcon icon={faMessage} fixedWidth />
+                  </Button>
+                </InputGroup>
+              </Col>
+            </Row>
+          </Container>
         </Card.Body>
       </Card>
     </div>

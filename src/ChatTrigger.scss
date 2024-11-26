@@ -3,24 +3,6 @@ $chat-trigger-hover-color: #c66606;
 $chat-trigger-size: 64px;
 $chat-trigger-margin: 8px;
 
-@keyframes hoverOn {
-  from {
-    background-color: $chat-trigger-bg-color;
-  }
-  to {
-    background-color: $chat-trigger-hover-color;
-  }
-}
-
-@keyframes hoverOff {
-  from {
-    background-color: $chat-trigger-hover-color;
-  }
-  to {
-    background-color: $chat-trigger-bg-color;
-  }
-}
-
 .chat-trigger {
   position: fixed;
   bottom: $chat-trigger-margin;
@@ -35,11 +17,10 @@ $chat-trigger-margin: 8px;
   background-color: $chat-trigger-bg-color;
   box-shadow: #606060aa 2px 2px $chat-trigger-margin;
   cursor: pointer;
-  animation-name: hoverOff;
-  animation-duration: 2s;
-}
+  transition: background-color 1s;
 
-.chat-trigger:hover {
-  animation-name: hoverOn;
-  animation-duration: 2s;
+  &:hover {
+    background-color: $chat-trigger-hover-color;
+    transition: background-color 1s;
+  }
 }

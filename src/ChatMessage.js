@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { Badge } from 'react-bootstrap';
 
-export default function ChatMessage({ sent = false, message }) {
+export default function ChatMessage({ sent = false, children }) {
   return (
     <Badge
       pill
@@ -12,15 +12,15 @@ export default function ChatMessage({ sent = false, message }) {
         sent && 'chat-message-sent',
         !sent && 'text-dark'
       )}
-      bg={sent ? 'primary' : 'light'}
+      bg={sent ? 'primary' : 'white'}
     >
       {sent ? 'You: ' : 'Bot: '}
-      {message}
+      {children}
     </Badge>
   );
 }
 
 ChatMessage.propTypes = {
   sent: PropTypes.bool,
-  message: PropTypes.string.isRequired
+  children: PropTypes.node.isRequired
 };
