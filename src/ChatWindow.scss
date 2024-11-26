@@ -1,0 +1,23 @@
+$chat-window-margin: 8px;
+
+.chat-window {
+  position: absolute;
+  bottom: 100px;
+  right: $chat-window-margin;
+  max-height: 600px;
+  overflow-y: scroll;
+  min-width: 400px;
+
+  &-messages {
+    display: flex;
+    flex-direction: column;
+  }
+  &-visible {
+    opacity: 1;
+    transition: opacity 1s;
+  }
+  &-invisible {
+    opacity: 0;
+    transition: opacity 1s;
+  }
+}

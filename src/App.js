@@ -10,7 +10,7 @@ export default function App() {
 
   return (
     <Fragment>
-      {show && <ChatWindow />}
+      <ChatWindow show={show} />
       <ChatTrigger onClick={toggleShow} />
     </Fragment>
   );
