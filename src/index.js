@@ -1,5 +1,10 @@
-import 'react-chat-elements/dist/main.css';
+import { createRoot } from 'react-dom/client';
+
 import './index.scss';
+import 'react-chat-elements/dist/main.css';
+
+// eslint-disable-next-line no-unused-vars
+import ChatTrigger from './ChatTrigger.js';
 
 // import { ChatUx } from '@ayan4m1/chatux';
 
@@ -16,3 +21,7 @@ import './index.scss';
 //   }
 // });
 // widget.start(true);
+
+const root = createRoot(document.getElementById('chat-widget'));
+
+root.render(<ChatTrigger />);

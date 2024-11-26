@@ -27,7 +27,8 @@
           "for",
           "elseif",
           "return",
-          "function"
+          "function",
+          "use"
         ]
       }
     ],
@@ -79,6 +80,7 @@
     "function-url-quotes": "always",
     "function-url-scheme-allowed-list": null,
     "function-url-scheme-disallowed-list": null,
+    "function-no-unknown": null,
     "keyframe-declaration-no-important": true,
     "length-zero-no-unit": true,
     "max-nesting-depth": 4,
@@ -105,7 +107,7 @@
     "rule-empty-line-before": [
       "always",
       {
-        "except": ["first-nested"],
+        "except": ["first-nested", "inside-block"],
         "ignore": ["after-comment"]
       }
     ],

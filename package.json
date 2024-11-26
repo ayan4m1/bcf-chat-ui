@@ -9,11 +9,17 @@
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack",
     "start": "cross-env NODE_ENV=development webpack serve",
+    "lint": "eslint ./src/**/*.js && stylelint ./src/**/*.scss",
     "prepare": "husky"
   },
   "dependencies": {
     "@babel/runtime": "^7.26.0",
-    "react-chat-elements": "^12.0.17"
+    "@fortawesome/fontawesome-svg-core": "^6.7.1",
+    "@fortawesome/free-solid-svg-icons": "^6.7.1",
+    "@fortawesome/react-fontawesome": "^0.2.2",
+    "react": "^18.2.0",
+    "react-chat-elements": "^12.0.17",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.26.0",
@@ -35,6 +41,8 @@
     "eslint-import-resolver-webpack": "^0.13.9",
     "eslint-plugin-import-x": "^4.4.3",
     "eslint-plugin-prettier": "^5.2.1",
+    "eslint-plugin-react": "^7.37.2",
+    "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-webpack-plugin": "^4.2.0",
     "globals": "^15.12.0",
     "html-loader": "^5.1.0",

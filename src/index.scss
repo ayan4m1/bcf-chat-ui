@@ -1,3 +1,15 @@
+@use "ChatTrigger.scss";
+
 html {
   font-family: "Arial", "Helvetica", sans-serif;
+}
+
+body {
+  height: 100vh;
+  margin: 0;
+}
+
+.chat-widget {
+  height: 100vh;
+  padding: 0;
 }
