@@ -18,21 +18,12 @@ import { faMessage, faSpinner } from '@fortawesome/free-solid-svg-icons';
 
 import ChatMessage from 'ChatMessage';
 
-export default function ChatWindow({ show }) {
+export default function ChatWindow({ show, onDismiss }) {
   const inputRef = useRef();
   const [question, setQuestion] = useState('');
   const [loading, setLoading] = useState(false);
   const [showButtons, setShowButtons] = useState(false);
-  const [dismissed, setDismissed] = useState(false);
-  const [messages, setMessages] = useState([
-    {
-      sent: true,
-      message: 'I need all the strawberries, NOW!'
-    },
-    {
-      message: 'We can ship those right to you for free, sir.'
-    }
-  ]);
+  const [messages, setMessages] = useState([]);
   const handleKeyDown = useCallback(
     (e) => {
       if (e.key === 'Enter') {
@@ -46,7 +37,14 @@ export default function ChatWindow({ show }) {
       setQuestion(inputRef.current.value);
     }
   }, [setQuestion, inputRef]);
-  const handleDismiss = useCallback(() => setDismissed(true), [setDismissed]);
+  const handleDismiss = useCallback(() => {
+    setQuestion('');
+    setMessages([]);
+    setShowButtons(false);
+    if (onDismiss) {
+      onDismiss();
+    }
+  }, [setQuestion, setMessages, setShowButtons, onDismiss]);
   const handleRedirect = useCallback(() => {
     window.location = 'https://www.bullcityflavors.com/contact-us/';
   }, []);
@@ -67,22 +65,24 @@ export default function ChatWindow({ show }) {
     ]);
 
     const fetchData = async () => {
-      // const response = await fetch(
-      //   `http://localhost:9000/help?q=${encodeURIComponent(question)}`
-      // );
-      // const json = await response.json();
+      const response = await fetch(
+        `http://localhost:9011/answer?question=${encodeURIComponent(question)}`
+      );
+      const answer = await response.text();
 
-      // console.dir(json);
-      setTimeout(() => {
-        setShowButtons(true);
-        setLoading(false);
-        setMessages((messages) => [
-          ...messages,
-          {
-            message: 'Testing reply from server'
-          }
-        ]);
-      }, 1500);
+      setLoading(false);
+      setShowButtons(true);
+      setMessages((messages) => [...messages, { message: answer }]);
+      // setTimeout(() => {
+      //   setShowButtons(true);
+      //   setLoading(false);
+      //   setMessages((messages) => [
+      //     ...messages,
+      //     {
+      //       message: 'Testing reply from server'
+      //     }
+      //   ]);
+      // }, 1500);
     };
 
     throttle(fetchData, 3000)();
@@ -92,11 +92,11 @@ export default function ChatWindow({ show }) {
     <div
       className={classNames(
         'chat-window',
-        `chat-window-${show && !dismissed ? 'visible' : 'invisible'}`
+        `chat-window-${show ? 'visible' : 'invisible'}`
       )}
     >
       <Card bg="light">
-        <Card.Header>Ask Bull City</Card.Header>
+        <Card.Header>Ask Bull City Flavors</Card.Header>
         <Card.Body>
           <Container fluid className="g-0">
             <Row>

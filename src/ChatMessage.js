@@ -9,6 +9,7 @@ export default function ChatMessage({ sent = false, children }) {
       pill
       className={classNames(
         'chat-message',
+        'text-wrap',
         sent && 'chat-message-sent',
         !sent && 'text-dark'
       )}

@@ -5,8 +5,8 @@ $chat-window-margin: 8px;
   bottom: 100px;
   right: $chat-window-margin;
   max-height: 600px;
-  overflow-y: scroll;
   min-width: 400px;
+  max-width: 700px;
 
   &-messages {
     display: flex;

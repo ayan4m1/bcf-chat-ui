@@ -10,8 +10,8 @@ export default function App() {
 
   return (
     <Fragment>
-      <ChatWindow show={show} />
-      <ChatTrigger onClick={toggleShow} />
+      <ChatWindow show={show} onDismiss={toggleShow} />
+      <ChatTrigger show={show} onClick={toggleShow} />
     </Fragment>
   );
 }
