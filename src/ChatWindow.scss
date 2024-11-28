@@ -4,13 +4,14 @@ $chat-window-margin: 8px;
   position: absolute;
   bottom: 100px;
   right: $chat-window-margin;
-  max-height: 600px;
   min-width: 400px;
   max-width: 700px;
 
   &-messages {
     display: flex;
     flex-direction: column;
+    max-height: 500px;
+    overflow-y: scroll;
   }
   &-visible {
     opacity: 1;

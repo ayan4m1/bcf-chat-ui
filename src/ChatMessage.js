@@ -6,11 +6,11 @@ import { Badge } from 'react-bootstrap';
 export default function ChatMessage({ sent = false, children }) {
   return (
     <Badge
-      pill
       className={classNames(
         'chat-message',
         'text-wrap',
         sent && 'chat-message-sent',
+        sent && 'text-end',
         !sent && 'text-dark'
       )}
       bg={sent ? 'primary' : 'white'}

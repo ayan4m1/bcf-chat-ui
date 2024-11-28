@@ -73,16 +73,6 @@ export default function ChatWindow({ show, onDismiss }) {
       setLoading(false);
       setShowButtons(true);
       setMessages((messages) => [...messages, { message: answer }]);
-      // setTimeout(() => {
-      //   setShowButtons(true);
-      //   setLoading(false);
-      //   setMessages((messages) => [
-      //     ...messages,
-      //     {
-      //       message: 'Testing reply from server'
-      //     }
-      //   ]);
-      // }, 1500);
     };
 
     throttle(fetchData, 3000)();
