@@ -17,7 +17,10 @@ export default [
       prettierPlugin
     },
     languageOptions: {
-      globals: globals.browser,
+      globals: {
+        ...globals.browser,
+        BCF_CHAT_API_URL: false
+      },
       parser: babelParser,
       parserOptions: {
         requireConfigFile: false,

@@ -1,3 +1,6 @@
+import 'dotenv/config';
+
+import { DefinePlugin } from 'webpack';
 import { dirname, resolve } from 'path';
 import autoprefixer from 'autoprefixer';
 import HtmlPlugin from 'html-webpack-plugin';
@@ -25,6 +28,9 @@ const plugins = [
   }),
   new MiniCSSExtractPlugin({
     filename: '[name].css'
+  }),
+  new DefinePlugin({
+    BCF_CHAT_API_URL: JSON.stringify(process.env.BCF_CHAT_API_URL)
   })
 ];
 
