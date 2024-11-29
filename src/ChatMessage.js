@@ -10,7 +10,7 @@ export default function ChatMessage({ sent = false, children }) {
         'chat-message',
         'text-wrap',
         sent && 'chat-message-sent',
-        sent && 'text-end',
+        sent ? 'text-end' : 'text-start',
         !sent && 'text-dark'
       )}
       bg={sent ? 'primary' : 'white'}
