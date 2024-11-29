@@ -1,6 +1,7 @@
 import 'dotenv/config';
 
-import { DefinePlugin } from 'webpack';
+import { fileURLToPath } from 'url';
+import webpack from 'webpack';
 import { dirname, resolve } from 'path';
 import autoprefixer from 'autoprefixer';
 import HtmlPlugin from 'html-webpack-plugin';
@@ -9,23 +10,15 @@ import StylelintPlugin from 'stylelint-webpack-plugin';
 import ESLintWebpackPlugin from 'eslint-webpack-plugin';
 import postcssFlexbugsFixes from 'postcss-flexbugs-fixes';
 import MiniCSSExtractPlugin from 'mini-css-extract-plugin';
-import { CleanWebpackPlugin as CleanPlugin } from 'clean-webpack-plugin';
 import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
-import { fileURLToPath } from 'url';
+import { CleanWebpackPlugin as CleanPlugin } from 'clean-webpack-plugin';
 
+const { DefinePlugin } = webpack;
 const dev = process.env.NODE_ENV === 'development';
-
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const plugins = [
   new CleanPlugin(),
-  new StylelintPlugin({
-    configFile: '.stylelintrc',
-    context: 'src',
-    files: '**/*.scss',
-    failOnError: true,
-    quiet: false
-  }),
   new MiniCSSExtractPlugin({
     filename: '[name].css'
   }),
@@ -43,6 +36,13 @@ if (dev) {
       new ESLintWebpackPlugin({
         configType: 'flat',
         eslintPath: 'eslint/use-at-your-own-risk'
+      }),
+      new StylelintPlugin({
+        configFile: '.stylelintrc',
+        context: 'src',
+        files: '**/*.scss',
+        failOnError: true,
+        quiet: false
       })
     ]
   );
