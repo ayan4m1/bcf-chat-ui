@@ -66,7 +66,7 @@ export default function ChatWindow({ show, onDismiss }) {
 
     const fetchData = async () => {
       const response = await fetch(
-        `http://${BCF_CHAT_API_URL}/answer?question=${encodeURIComponent(question)}`
+        `${BCF_CHAT_API_URL}/answer?question=${encodeURIComponent(question)}`
       );
       const answer = await response.text();
 
