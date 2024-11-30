@@ -10,13 +10,19 @@ import {
   InputGroup,
   Row,
   Col,
-  ButtonGroup
+  ButtonGroup,
+  OverlayTrigger
 } from 'react-bootstrap';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMessage, faSpinner } from '@fortawesome/free-solid-svg-icons';
+import {
+  faInfoCircle,
+  faMessage,
+  faSpinner
+} from '@fortawesome/free-solid-svg-icons';
 
 import ChatMessage from 'ChatMessage';
+import InfoTooltip from 'InfoTooltip';
 
 export default function ChatWindow({ show, onDismiss }) {
   const inputRef = useRef();
@@ -86,7 +92,14 @@ export default function ChatWindow({ show, onDismiss }) {
       )}
     >
       <Card bg="light">
-        <Card.Header>Ask Bull City Flavors</Card.Header>
+        <Card.Header>
+          Ask Bull City Flavors{' '}
+          {show && (
+            <OverlayTrigger placement="top" delay={250} overlay={InfoTooltip}>
+              <FontAwesomeIcon icon={faInfoCircle} />
+            </OverlayTrigger>
+          )}
+        </Card.Header>
         <Card.Body>
           <Container fluid className="g-0">
             <Row>
