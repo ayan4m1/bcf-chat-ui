@@ -71,14 +71,28 @@ export default function ChatWindow({ show, onDismiss }) {
     ]);
 
     const fetchData = async () => {
-      const response = await fetch(
-        `${BCF_CHAT_API_URL}/answer?question=${encodeURIComponent(question)}`
-      );
-      const answer = await response.text();
+      setQuestion('');
 
-      setLoading(false);
-      setShowButtons(true);
-      setMessages((messages) => [...messages, { message: answer }]);
+      try {
+        const response = await fetch(
+          `${BCF_CHAT_API_URL}/answer?question=${encodeURIComponent(question)}`
+        );
+        const answer = await response.text();
+
+        setShowButtons(true);
+        setMessages((messages) => [...messages, { message: answer }]);
+      } catch (error) {
+        console.error(error);
+        setMessages((messages) => [
+          ...messages,
+          {
+            message:
+              'There was an error contacting the bot. Please try again later.'
+          }
+        ]);
+      } finally {
+        setLoading(false);
+      }
     };
 
     throttle(fetchData, 3000)();
