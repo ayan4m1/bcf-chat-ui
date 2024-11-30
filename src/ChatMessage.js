@@ -15,7 +15,7 @@ export default function ChatMessage({ sent = false, children }) {
       )}
       bg={sent ? 'primary' : 'white'}
     >
-      {sent ? 'You: ' : 'Bot: '}
+      <strong>{sent ? 'You: ' : 'Bot: '}</strong>
       {children}
     </Badge>
   );
