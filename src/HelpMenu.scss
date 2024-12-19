@@ -1,0 +1,22 @@
+$chat-window-margin: 8px;
+
+.help-menu {
+  position: absolute;
+  bottom: 100px;
+  right: $chat-window-margin;
+  min-width: 200px;
+
+  &-visible {
+    opacity: 1;
+    transition: opacity 1s;
+  }
+  &-invisible {
+    opacity: 0;
+    transition: opacity 1s;
+  }
+}
+
+.clickable {
+  cursor: pointer;
+  text-decoration: underline;
+}

@@ -4,9 +4,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons/faQuestionCircle';
 import { faClose } from '@fortawesome/free-solid-svg-icons';
 
-export default function ChatTrigger({ show, onClick }) {
+export default function MenuTrigger({ show, onClick }) {
   return (
-    <div className="chat-trigger" onClick={onClick}>
+    <div className="menu-trigger" onClick={onClick}>
       <FontAwesomeIcon
         icon={show ? faClose : faQuestionCircle}
         size="3x"
@@ -16,7 +16,7 @@ export default function ChatTrigger({ show, onClick }) {
   );
 }
 
-ChatTrigger.propTypes = {
+MenuTrigger.propTypes = {
   show: PropTypes.bool.isRequired,
   onClick: PropTypes.func.isRequired
 };

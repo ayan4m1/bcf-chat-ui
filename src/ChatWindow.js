@@ -16,6 +16,8 @@ import {
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
+  faAngleLeft,
+  faCaretLeft,
   faInfoCircle,
   faMessage,
   faSpinner
@@ -26,6 +28,7 @@ import InfoTooltip from 'InfoTooltip';
 
 export default function ChatWindow({ show, onDismiss }) {
   const inputRef = useRef();
+  const [sessionId, setSessionId] = useState(null);
   const [question, setQuestion] = useState('');
   const [loading, setLoading] = useState(false);
   const [showButtons, setShowButtons] = useState(false);
@@ -34,9 +37,11 @@ export default function ChatWindow({ show, onDismiss }) {
     (e) => {
       if (e.key === 'Enter') {
         setQuestion(e.target.value);
+      } else if (e.key == 'Escape') {
+        onDismiss();
       }
     },
-    [setQuestion]
+    [setQuestion, onDismiss]
   );
   const handleClick = useCallback(() => {
     if (inputRef.current) {
@@ -74,13 +79,20 @@ export default function ChatWindow({ show, onDismiss }) {
       setQuestion('');
 
       try {
-        const response = await fetch(
-          `${BCF_CHAT_API_URL}/answer?question=${encodeURIComponent(question)}`
-        );
-        const answer = await response.text();
+        const result = await fetch(`${BCF_CHAT_API_URL}/answer`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            question,
+            sessionId
+          })
+        });
+        const { response } = await result.json();
 
         setShowButtons(true);
-        setMessages((messages) => [...messages, { message: answer }]);
+        setMessages((messages) => [...messages, { message: response }]);
       } catch (error) {
         console.error(error);
         setMessages((messages) => [
@@ -96,7 +108,26 @@ export default function ChatWindow({ show, onDismiss }) {
     };
 
     throttle(fetchData, 3000)();
-  }, [question, setMessages]);
+  }, [inputRef, question, setMessages]);
+
+  useEffect(() => {
+    const createSession = async () => {
+      try {
+        const response = await fetch(`${BCF_CHAT_API_URL}/session`, {
+          method: 'PUT'
+        });
+        const { sessionId } = await response.json();
+
+        setSessionId(sessionId);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    if (show && !sessionId) {
+      createSession();
+    }
+  }, [show, sessionId]);
 
   return (
     <div
@@ -107,10 +138,15 @@ export default function ChatWindow({ show, onDismiss }) {
     >
       <Card bg="light">
         <Card.Header>
+          <FontAwesomeIcon
+            icon={faAngleLeft}
+            fixedWidth
+            onClick={handleDismiss}
+          />
           Ask Bull City Flavors{' '}
           {show && (
             <OverlayTrigger placement="top" delay={250} overlay={InfoTooltip}>
-              <FontAwesomeIcon icon={faInfoCircle} />
+              <FontAwesomeIcon icon={faInfoCircle} fixedWidth />
             </OverlayTrigger>
           )}
         </Card.Header>

@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
 import { Fragment, useCallback, useState } from 'react';
 
-import ChatTrigger from 'ChatTrigger';
-import ChatWindow from 'ChatWindow';
+import MenuTrigger from 'MenuTrigger';
+import HelpMenu from 'HelpMenu';
 
 export default function App() {
   const [show, setShow] = useState(false);
@@ -10,8 +10,8 @@ export default function App() {
 
   return (
     <Fragment>
-      <ChatWindow show={show} onDismiss={toggleShow} />
-      <ChatTrigger show={show} onClick={toggleShow} />
+      <HelpMenu show={show} onDismiss={toggleShow} />
+      <MenuTrigger show={show} onClick={toggleShow} />
     </Fragment>
   );
 }
