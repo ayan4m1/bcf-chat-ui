@@ -29,22 +29,20 @@ const plugins = [
 
 if (dev) {
   plugins.push(
-    ...[
-      new HtmlPlugin({
-        template: './src/index.html'
-      }),
-      new ESLintWebpackPlugin({
-        configType: 'flat',
-        eslintPath: 'eslint/use-at-your-own-risk'
-      }),
-      new StylelintPlugin({
-        configFile: '.stylelintrc',
-        context: 'src',
-        files: '**/*.scss',
-        failOnError: true,
-        quiet: false
-      })
-    ]
+    new HtmlPlugin({
+      template: './src/index.html'
+    }),
+    new ESLintWebpackPlugin({
+      configType: 'flat',
+      eslintPath: 'eslint/use-at-your-own-risk'
+    }),
+    new StylelintPlugin({
+      configFile: '.stylelintrc',
+      context: 'src',
+      files: '**/*.scss',
+      failOnError: true,
+      quiet: false
+    })
   );
 }
 
@@ -94,15 +92,7 @@ export default {
       },
       {
         test: /\.html$/,
-        use: [
-          {
-            loader: 'html-loader',
-            options: {
-              minimize: true,
-              sources: false
-            }
-          }
-        ]
+        use: ['html-loader']
       },
       {
         test: /\.png$/,
@@ -112,8 +102,8 @@ export default {
   },
   output: {
     path: resolve(__dirname, 'dist'),
-    filename: '[name].[fullhash].js',
-    chunkFilename: '[name].[chunkhash].js'
+    filename: '[name].js',
+    chunkFilename: '[name].js'
   },
   plugins,
   resolve: {
@@ -121,13 +111,6 @@ export default {
     modules: ['node_modules', 'src']
   },
   optimization: {
-    minimizer: [
-      new TerserPlugin({
-        terserOptions: {
-          ecma: 12
-        }
-      }),
-      new CssMinimizerPlugin()
-    ]
+    minimizer: [new TerserPlugin(), new CssMinimizerPlugin()]
   }
 };

@@ -1,4 +1,4 @@
-import { createRoot } from 'react-dom/client';
+import { createRoot } from 'react-dom';
 
 import './index.scss';
 // eslint-disable-next-line no-unused-vars
