@@ -17,7 +17,6 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faAngleLeft,
-  faCaretLeft,
   faInfoCircle,
   faMessage,
   faSpinner

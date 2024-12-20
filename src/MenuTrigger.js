@@ -1,8 +1,7 @@
 import PropTypes from 'prop-types';
 // eslint-disable-next-line no-unused-vars
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons/faQuestionCircle';
-import { faClose } from '@fortawesome/free-solid-svg-icons';
+import { faQuestionCircle, faClose } from '@fortawesome/free-solid-svg-icons';
 
 export default function MenuTrigger({ show, onClick }) {
   return (
