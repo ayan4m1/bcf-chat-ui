@@ -24,14 +24,14 @@ const plugins = [
   }),
   new DefinePlugin({
     BCF_CHAT_API_URL: JSON.stringify(process.env.BCF_CHAT_API_URL)
+  }),
+  new HtmlPlugin({
+    template: './src/index.html'
   })
 ];
 
 if (dev) {
   plugins.push(
-    new HtmlPlugin({
-      template: './src/index.html'
-    }),
     new ESLintWebpackPlugin({
       configType: 'flat',
       eslintPath: 'eslint/use-at-your-own-risk'
