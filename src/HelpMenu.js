@@ -27,15 +27,12 @@ export default function HelpMenu({ show }) {
         <Card.Header>Get Help &amp; Advice</Card.Header>
         <Card.Body>
           <ListGroup>
-            <a
-              href="https://www.bullcityflavors.com/contact-us/"
-              rel="noopener noreferrer"
-            >
+            <a href="https://www.bullcityflavors.com/get-personalized-flavor-recommendations/">
               <ListGroup.Item>
                 Get personalized flavor recommendations
               </ListGroup.Item>
             </a>
-            <a href="https://www.bullcityflavors.com/faq/">
+            <a href="https://www.bullcityflavors.com/frequently-asked-questions/">
               <ListGroup.Item>
                 Get answers to commonly asked questions
               </ListGroup.Item>
