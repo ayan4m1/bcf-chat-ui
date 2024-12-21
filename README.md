@@ -16,11 +16,11 @@ Add the following HTML **inside the `<head>` tag** in the header template:
 
 ```html
 <script
-  src="https://www.unpkg.com/react@19.0.0/cjs/react.production.js"
+  src="https://www.unpkg.com/react@18.2.0/umd/react.production.min.js"
   crossorigin="anonymous"
 ></script>
 <script
-  src="https://unpkg.com/react-dom@19.0.0/cjs/react-dom-client.production.js"
+  src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"
   crossorigin="anonymous"
 ></script>
 <script src="/path/to/main.js"></script>
