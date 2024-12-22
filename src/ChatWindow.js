@@ -191,22 +191,24 @@ export default function ChatWindow({ show, onDismiss }) {
                 </Col>
               </Row>
             )}
-            <Row className="mt-2">
-              <Col>
-                <InputGroup>
-                  <Form.Control
-                    ref={inputRef}
-                    type="text"
-                    name="message"
-                    placeholder="Enter your question here"
-                    onKeyDown={handleKeyDown}
-                  />
-                  <Button variant="primary" onClick={handleClick}>
-                    <FontAwesomeIcon icon={faMessage} fixedWidth />
-                  </Button>
-                </InputGroup>
-              </Col>
-            </Row>
+            {Boolean(sessionId) && (
+              <Row className="mt-2">
+                <Col>
+                  <InputGroup>
+                    <Form.Control
+                      ref={inputRef}
+                      type="text"
+                      name="message"
+                      placeholder="Enter your question here"
+                      onKeyDown={handleKeyDown}
+                    />
+                    <Button variant="primary" onClick={handleClick}>
+                      <FontAwesomeIcon icon={faMessage} fixedWidth />
+                    </Button>
+                  </InputGroup>
+                </Col>
+              </Row>
+            )}
           </Container>
         </Card.Body>
       </Card>
