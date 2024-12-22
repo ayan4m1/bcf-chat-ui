@@ -60,7 +60,7 @@ export default function ChatWindow({ show, onDismiss }) {
   }, []);
 
   useEffect(() => {
-    if (!question || !inputRef.current) {
+    if (loading || !question || !inputRef.current) {
       return;
     }
 
