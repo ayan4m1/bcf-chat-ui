@@ -88,7 +88,11 @@ export default function ChatWindow({ show, onDismiss }) {
             sessionId
           })
         });
-        const { response } = await result.json();
+        const { response, error } = await result.json();
+
+        if (error) {
+          throw new Error(error);
+        }
 
         setShowButtons(true);
         setMessages((messages) => [...messages, { message: response }]);
