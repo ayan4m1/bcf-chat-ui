@@ -215,5 +215,6 @@ export default function ChatWindow({ show, onDismiss }) {
 }
 
 ChatWindow.propTypes = {
-  show: PropTypes.bool.isRequired
+  show: PropTypes.bool.isRequired,
+  onDismiss: PropTypes.func.isRequired
 };
