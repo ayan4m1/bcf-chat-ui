@@ -6,6 +6,9 @@ import App from './App.js';
 
 const widget = document.getElementById('chat-widget');
 
+console.log('Chat widget initializing...');
+
 if (widget) {
+  console.log('Found chat widget element');
   createRoot(widget).render(<App />);
 }
