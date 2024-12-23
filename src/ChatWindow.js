@@ -37,7 +37,7 @@ export default function ChatWindow({ show, onDismiss }) {
       if (e.key === 'Enter') {
         setQuestion(e.target.value);
       } else if (e.key == 'Escape') {
-        onDismiss();
+        onDismiss?.();
       }
     },
     [setQuestion, onDismiss]
@@ -51,9 +51,7 @@ export default function ChatWindow({ show, onDismiss }) {
     setQuestion('');
     setMessages([]);
     setShowButtons(false);
-    if (onDismiss) {
-      onDismiss();
-    }
+    onDismiss?.();
   }, [setQuestion, setMessages, setShowButtons, onDismiss]);
   const handleRedirect = useCallback(() => {
     window.location = 'https://www.bullcityflavors.com/contact-us/';
