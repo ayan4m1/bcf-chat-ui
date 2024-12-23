@@ -5,10 +5,6 @@
 @use "InfoTooltip.scss";
 @use "MenuTrigger.scss";
 
-html {
-  font-family: "Arial", "Helvetica", sans-serif;
-}
-
 body {
   height: 100vh;
   margin: 0;
@@ -17,4 +13,8 @@ body {
 .chat-widget {
   height: 100vh;
   padding: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10000;
 }
