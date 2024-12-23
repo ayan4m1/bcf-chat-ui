@@ -4,11 +4,13 @@ import './index.scss';
 // eslint-disable-next-line no-unused-vars
 import App from './App.js';
 
-const widget = document.getElementById('chat-widget');
+window.onload = () => {
+  const widget = document.getElementById('chat-widget');
 
-console.log('Chat widget initializing...');
+  console.log('Chat widget initializing...');
 
-if (widget) {
-  console.log('Found chat widget element');
-  createRoot(widget).render(<App />);
-}
+  if (widget) {
+    console.log('Found chat widget element');
+    createRoot(widget).render(<App />);
+  }
+};
