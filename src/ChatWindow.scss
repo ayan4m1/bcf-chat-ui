@@ -1,10 +1,9 @@
-$chat-window-margin: 16px;
-$chat-window-bottom-offset: 64px + 32px;
+@use "variables.scss" as *;
 
 .chat-window {
   position: fixed;
-  bottom: $chat-window-bottom-offset;
-  right: $chat-window-margin;
+  right: $right-margin;
+  bottom: $bottom-offset;
   min-width: 400px;
   max-width: 600px;
   max-height: 600px;

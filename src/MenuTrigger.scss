@@ -1,13 +1,13 @@
+@use "variables.scss" as *;
+
 $menu-trigger-bg-color: #f77f0a;
 $menu-trigger-hover-color: #c66606;
 $menu-trigger-size: 64px;
-$menu-trigger-margin: 16px;
-$menu-bottom-offset: 48px;
 
 .menu-trigger {
   position: fixed;
-  bottom: $menu-trigger-margin + $menu-bottom-offset;
-  right: $menu-trigger-margin;
+  right: $right-margin;
+  bottom: $right-margin + $bottom-offset;
   height: $menu-trigger-size;
   width: $menu-trigger-size;
   display: flex;
@@ -16,7 +16,7 @@ $menu-bottom-offset: 48px;
   text-align: center;
   border-radius: 40%;
   background-color: $menu-trigger-bg-color;
-  box-shadow: #606060aa 2px 2px $menu-trigger-margin;
+  box-shadow: #606060aa 2px 2px $right-margin;
   cursor: pointer;
   transition: background-color 1s;
 

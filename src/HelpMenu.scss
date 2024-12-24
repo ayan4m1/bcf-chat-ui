@@ -1,10 +1,9 @@
-$help-menu-margin: 16px;
-$help-menu-bottom-offset: 64px + 32px;
+@use "variables.scss" as *;
 
 .help-menu {
   position: fixed;
-  bottom: $help-menu-bottom-offset;
-  right: $help-menu-margin;
+  right: $right-margin;
+  bottom: $right-margin + $bottom-offset;
   min-width: 200px;
 
   &-visible {
