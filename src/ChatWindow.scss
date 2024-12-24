@@ -1,8 +1,8 @@
-$chat-window-margin: 8px;
+$chat-window-margin: 16px;
 
 .chat-window {
-  position: absolute;
-  bottom: 100px;
+  position: fixed;
+  bottom: 164px;
   right: $chat-window-margin;
   min-width: 400px;
   max-width: 700px;

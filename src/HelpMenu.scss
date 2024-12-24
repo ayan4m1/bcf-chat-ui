@@ -1,7 +1,7 @@
 $chat-window-margin: 16px;
 
 .help-menu {
-  position: absolute;
+  position: fixed;
   bottom: 164px;
   right: $chat-window-margin;
   min-width: 200px;
