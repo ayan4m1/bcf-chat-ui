@@ -37,9 +37,11 @@ export default function HelpMenu({ show }) {
                 Get answers to commonly asked questions
               </ListGroup.Item>
             </a>
-            <a className="clickable" onClick={handleShowChat}>
-              <ListGroup.Item>Chat with our flavor robot</ListGroup.Item>
-            </a>
+            {!window.location.host.includes('bullcityflavors.com') && (
+              <a className="clickable" onClick={handleShowChat}>
+                <ListGroup.Item>Chat with our flavor robot</ListGroup.Item>
+              </a>
+            )}
           </ListGroup>
         </Card.Body>
       </Card>
