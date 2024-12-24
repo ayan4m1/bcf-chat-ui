@@ -1,9 +1,10 @@
-$chat-window-margin: 16px;
+$help-menu-margin: 16px;
+$help-menu-bottom-offset: 64px + 32px;
 
 .help-menu {
   position: fixed;
-  bottom: 108px;
-  right: $chat-window-margin;
+  bottom: $help-menu-bottom-offset;
+  right: $help-menu-margin;
   min-width: 200px;
 
   &-visible {

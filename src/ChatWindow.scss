@@ -1,16 +1,17 @@
 $chat-window-margin: 16px;
+$chat-window-bottom-offset: 64px + 32px;
 
 .chat-window {
   position: fixed;
-  bottom: 108px;
+  bottom: $chat-window-bottom-offset;
   right: $chat-window-margin;
   min-width: 400px;
-  max-width: 700px;
+  max-width: 600px;
+  max-height: 600px;
 
   &-messages {
     display: flex;
     flex-direction: column;
-    max-height: 500px;
     overflow-y: scroll;
   }
   &-visible {
