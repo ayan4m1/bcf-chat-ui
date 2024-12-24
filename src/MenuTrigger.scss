@@ -7,7 +7,7 @@ $menu-trigger-size: 64px;
 .menu-trigger {
   position: fixed;
   right: $right-margin;
-  bottom: $right-margin + $bottom-offset;
+  bottom: $bottom-offset;
   height: $menu-trigger-size;
   width: $menu-trigger-size;
   display: flex;

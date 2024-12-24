@@ -3,7 +3,7 @@
 .help-menu {
   position: fixed;
   right: $right-margin;
-  bottom: $right-margin + $bottom-offset;
+  bottom: $bottom-offset;
   min-width: 200px;
 
   &-visible {
