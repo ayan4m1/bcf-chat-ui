@@ -27,7 +27,9 @@ import InfoTooltip from 'InfoTooltip';
 
 export default function ChatWindow({ show, onDismiss }) {
   const inputRef = useRef();
+  const chatWindowRef = useRef();
   const [sessionId, setSessionId] = useState(null);
+  const [sessionLoading, setSessionLoading] = useState(true);
   const [question, setQuestion] = useState('');
   const [loading, setLoading] = useState(false);
   const [showButtons, setShowButtons] = useState(false);
@@ -56,9 +58,20 @@ export default function ChatWindow({ show, onDismiss }) {
   const handleRedirect = useCallback(() => {
     window.location = 'https://www.bullcityflavors.com/contact-us/';
   }, []);
+  const handleBotError = useCallback(
+    () =>
+      setMessages((messages) => [
+        ...messages,
+        {
+          message:
+            'There was an error contacting the bot. Please try again later.'
+        }
+      ]),
+    [setMessages]
+  );
 
   useEffect(() => {
-    if (loading || !question || !inputRef.current) {
+    if (sessionLoading || loading || !question || !inputRef.current) {
       return;
     }
 
@@ -94,15 +107,12 @@ export default function ChatWindow({ show, onDismiss }) {
 
         setShowButtons(true);
         setMessages((messages) => [...messages, { message: response }]);
+        if (chatWindowRef.current) {
+          chatWindowRef.current.scrollTop = chatWindowRef.current.scrollHeight;
+        }
       } catch (error) {
         console.error(error);
-        setMessages((messages) => [
-          ...messages,
-          {
-            message:
-              'There was an error contacting the bot. Please try again later.'
-          }
-        ]);
+        handleBotError();
       } finally {
         setLoading(false);
       }
@@ -122,6 +132,9 @@ export default function ChatWindow({ show, onDismiss }) {
         setSessionId(sessionId);
       } catch (error) {
         console.error(error);
+        handleBotError();
+      } finally {
+        setSessionLoading(false);
       }
     };
 
@@ -155,7 +168,7 @@ export default function ChatWindow({ show, onDismiss }) {
           <Container fluid className="g-0">
             <Row>
               <Col>
-                <Card.Text className="chat-window-messages">
+                <Card.Text className="chat-window-messages" ref={chatWindowRef}>
                   {messages.map((message, index) => (
                     <ChatMessage key={index} sent={message.sent}>
                       {message.message}
@@ -170,6 +183,16 @@ export default function ChatWindow({ show, onDismiss }) {
                         size="xl"
                       />
                     </ChatMessage>
+                  )}
+                  {sessionLoading && (
+                    <Container fluid className="d-flex justify-content-center">
+                      <FontAwesomeIcon
+                        icon={faSpinner}
+                        spin
+                        fixedWidth
+                        size="2x"
+                      />
+                    </Container>
                   )}
                 </Card.Text>
               </Col>
